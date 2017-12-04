@@ -1,3 +1,7 @@
+import json
+from json import JSONDecodeError
+
+
 class Credit(object):
     _credit_body = 1600
     _percent = 0.23
@@ -78,7 +82,21 @@ class Calculator(object):
         for operation, res in zip(result.keys(), result.values()):
             print(operation, "=", res)
 
+    @staticmethod
+    def write_to_file():
+        with open('data.txt', 'w') as result_file:
+            json.dump(Calculator.results, result_file)
 
+    @staticmethod
+    def read_results_from_file():
+        with open('data.txt', 'r') as result_file:
+            try:
+                Calculator.results = json.load(result_file)
+            except JSONDecodeError:
+                print("JSONDecodeError")
+
+
+Calculator.read_results_from_file()
 Calculator.add(3, 2)
 Calculator.subtract(3, 2)
 Calculator.multiply(3, 7)
@@ -86,3 +104,4 @@ Calculator.divide(7, 0)
 Calculator.get_all_results()
 Calculator.get_previous_result()
 Calculator.get_results(2)
+Calculator.write_to_file()
