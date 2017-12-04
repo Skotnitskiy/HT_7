@@ -15,3 +15,21 @@ class Credit(object):
 credit = Credit()
 print("Must returned", credit.sum)
 print("Must returned per month", credit.amount_per_month)
+
+
+class Credit(object):
+    credit_body = 1600
+    percent = 0.23
+    months = 6
+
+    @staticmethod
+    def sum():
+        return Credit.credit_body * Credit.percent + Credit.credit_body
+
+    @staticmethod
+    def amount_per_month():
+        return Credit.sum() / Credit.months
+
+
+print("Must returned", Credit.sum())
+print("Must returned per month", Credit.amount_per_month())
